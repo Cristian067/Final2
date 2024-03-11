@@ -12,7 +12,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private float[] posz;
     [SerializeField] private Vector3[] poses;
 
-    [SerializeField] private int wave = 1;
+    public int wave = 0;
 
 
 

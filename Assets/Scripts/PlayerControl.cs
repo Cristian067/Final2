@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
@@ -18,9 +19,11 @@ public class PlayerControl : MonoBehaviour
 
 
     [SerializeField] private GameObject[] powerupIndicator;
-    
+
 
     //private float forwardInput;
+
+    private bool paused;
 
     private float vertical;
 
@@ -30,6 +33,8 @@ public class PlayerControl : MonoBehaviour
 
     private SpawnManager spawnManager;
 
+
+    private UIManager uiManager;
 
 
     // Start is called before the first frame update
@@ -43,7 +48,9 @@ public class PlayerControl : MonoBehaviour
     }
     void Start()
     {
+        Time.timeScale = 1;
         spawnManager = FindAnyObjectByType<SpawnManager>();
+        uiManager = FindAnyObjectByType<UIManager>();
         HideIndicators();
 
     }
@@ -54,6 +61,7 @@ public class PlayerControl : MonoBehaviour
 
         if (isGameOver)
         {
+            //uiManager.ShowGameOverPanel();
             return;
         }
 
@@ -67,7 +75,7 @@ public class PlayerControl : MonoBehaviour
             lives--;
             if (lives <= 0)
             {
-
+                uiManager.ShowGameOverPanel();
                 Destroy(gameObject);
 
             }
@@ -83,6 +91,24 @@ public class PlayerControl : MonoBehaviour
 
         }
 
+
+        if (Input.GetKeyDown("escape"))
+        {
+            if(paused == false)
+            {
+                uiManager.ShowPausePanel();
+                paused = true;
+
+            }
+            else if (paused == true)
+            {
+                uiManager.HidePausePanel();
+                paused = false;
+
+            }
+            
+        }
+        
 
 
 
