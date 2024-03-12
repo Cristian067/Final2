@@ -66,8 +66,11 @@ public class PlayerControl : MonoBehaviour
         }
 
         vertical = Input.GetAxis("Vertical");
-
-        rb.AddForce(focalPoint.transform.forward * speed * vertical);
+        if (!paused)
+        {
+            rb.AddForce(focalPoint.transform.forward * speed * vertical);
+        }
+        
 
 
         if (transform.position.y < -5)
@@ -192,5 +195,9 @@ public class PlayerControl : MonoBehaviour
     }
 
 
+    public bool KnowIfPause()
+    {
+        return paused;
+    }
 
 }

@@ -12,6 +12,8 @@ public class Enemy : MonoBehaviour
 
     private GameObject player;
 
+    private PlayerControl playerControl;
+
     private SpawnManager spawnManager;
 
 
@@ -23,6 +25,8 @@ public class Enemy : MonoBehaviour
     }
     void Start()
     {
+
+        playerControl = FindAnyObjectByType<PlayerControl>();
 
         spawnManager = FindAnyObjectByType<SpawnManager>();
 
@@ -36,8 +40,9 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         
-        
-        if(transform.position.y <-5)
+        if (!playerControl.KnowIfPause())
+        {
+            if(transform.position.y <-5)
         {
             Destroy(gameObject);
         }
@@ -45,6 +50,9 @@ public class Enemy : MonoBehaviour
         Vector3 direction = (player.transform.position - transform.position).normalized;
 
         rb.AddForce(direction * speed);
+
+        }
+        
 
         
 
