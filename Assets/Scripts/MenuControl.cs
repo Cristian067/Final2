@@ -14,12 +14,16 @@ public class MenuControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        //SceneManager.
         
     }
 
     public void Play()
     {
         SceneManager.LoadScene(1);
+
+        
     }
 
 

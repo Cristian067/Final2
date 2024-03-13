@@ -23,7 +23,7 @@ public class PlayerControl : MonoBehaviour
 
     //private float forwardInput;
 
-    private bool paused;
+    public bool paused;
 
     private float vertical;
 
@@ -35,6 +35,8 @@ public class PlayerControl : MonoBehaviour
 
 
     private UIManager uiManager;
+
+    private GameManager gameManager;
 
 
     // Start is called before the first frame update
@@ -50,6 +52,7 @@ public class PlayerControl : MonoBehaviour
     {
         Time.timeScale = 1;
         spawnManager = FindAnyObjectByType<SpawnManager>();
+        gameManager = FindAnyObjectByType<GameManager>();
         uiManager = FindAnyObjectByType<UIManager>();
         HideIndicators();
 
@@ -97,18 +100,7 @@ public class PlayerControl : MonoBehaviour
 
         if (Input.GetKeyDown("escape"))
         {
-            if(paused == false)
-            {
-                uiManager.ShowPausePanel();
-                paused = true;
-
-            }
-            else if (paused == true)
-            {
-                uiManager.HidePausePanel();
-                paused = false;
-
-            }
+            gameManager.ContinuePause();
             
         }
         
