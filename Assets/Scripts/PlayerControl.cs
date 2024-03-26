@@ -192,4 +192,13 @@ public class PlayerControl : MonoBehaviour
         return paused;
     }
 
+    public void get1up()
+    {
+        if(lives < 3)
+        {
+            lives++;
+        }
+        
+    }
+
 }

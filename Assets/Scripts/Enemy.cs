@@ -16,6 +16,8 @@ public class Enemy : MonoBehaviour
 
     private SpawnManager spawnManager;
 
+    [SerializeField] static private int got1up;
+
 
     // Start is called before the first frame update
 
@@ -37,11 +39,10 @@ public class Enemy : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         
-        if (!playerControl.KnowIfPause())
-        {
+        
             if(transform.position.y <-5)
         {
             Destroy(gameObject);
@@ -51,17 +52,21 @@ public class Enemy : MonoBehaviour
 
         rb.AddForce(direction * speed);
 
-        }
-        
-
-        
 
         
     }
 
     private void OnDestroy()
     {
+
         spawnManager.enemyCount--;
+        got1up++;
+        if(got1up > 10)
+        {
+            playerControl.get1up();
+            got1up = 0;
+        }
+        
     }
 
 
